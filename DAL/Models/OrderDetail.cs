@@ -15,3 +15,4 @@ namespace DAL.Models
         public decimal UnitAmount { get; set; }
     }
 }
+

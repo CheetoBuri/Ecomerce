@@ -14,3 +14,4 @@ namespace DAL.Models
         public decimal TotalAmount { get; set; }
     }
 }
+

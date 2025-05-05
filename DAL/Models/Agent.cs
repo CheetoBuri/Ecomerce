@@ -14,3 +14,4 @@ namespace DAL.Models
         public string Phone { get; set; }
     }
 }
+

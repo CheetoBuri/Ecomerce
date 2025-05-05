@@ -14,3 +14,4 @@ namespace DAL.Models
         public decimal Price { get; set; }
     }
 }
+
