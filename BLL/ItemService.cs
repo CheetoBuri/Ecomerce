@@ -5,12 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using DAL;
 using DAL.Models;
-
+using DAL.DTOs;
 namespace BLL
 {
     public class ItemService
     {
         private ItemRepository itemRepository;
+        private readonly ItemRepository _itemRepository;
 
         public ItemService()
         {
@@ -26,6 +27,21 @@ namespace BLL
         {
             // You can add validation logic here if needed
             itemRepository.InsertItem(item);
+        }
+
+        public List<ItemReportDto> GetTopSellingItems()
+        {
+            return _itemRepository.GetTopSellingItems();
+        }
+
+        public List<ItemReportDto> GetItemsByAgent(int agentId)
+        {
+            return _itemRepository.GetItemsByAgent(agentId);
+        }
+
+        public List<PurchaseSummaryDto> GetAgentPurchaseSummary(int agentId)
+        {
+            return _itemRepository.GetAgentPurchaseSummary(agentId);
         }
     }
 }

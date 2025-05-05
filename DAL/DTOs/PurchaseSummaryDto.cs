@@ -4,16 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL.Models
+namespace DAL.DTOs
 {
-    public class Order
+    public class PurchaseSummaryDto
     {
         public int OrderID { get; set; }
         public DateTime OrderDate { get; set; }
-        public int AgentID { get; set; }
         public decimal TotalAmount { get; set; }
-        public virtual Agent Agent { get; set; }
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }
-

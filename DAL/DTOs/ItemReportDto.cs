@@ -4,15 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL.Models
+namespace DAL.DTOs
 {
-    public class Item
+    public class ItemReportDto
     {
         public int ItemID { get; set; }
         public string ItemName { get; set; }
-        public string Size { get; set; }
-        public decimal Price { get; set; }
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public int TotalQuantity { get; set; }
     }
 }
-

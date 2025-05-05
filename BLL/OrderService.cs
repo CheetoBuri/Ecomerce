@@ -11,6 +11,7 @@ namespace BLL
     public class OrderService
     {
         private OrderRepository orderRepository;
+        private readonly OrderRepository _orderRepository;
 
         public OrderService()
         {
@@ -22,6 +23,16 @@ namespace BLL
             // Example: add total calculation or other logic here if needed
             order.OrderDate = DateTime.Now;
             orderRepository.InsertOrder(order);
+        }
+
+        public List<Order> GetAllOrders()
+        {
+            return _orderRepository.GetAllOrders();
+        }
+
+        public List<OrderDetail> GetOrderDetails(int orderId)
+        {
+            return _orderRepository.GetOrderDetails(orderId);
         }
     }
 }

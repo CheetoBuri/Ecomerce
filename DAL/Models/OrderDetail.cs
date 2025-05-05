@@ -13,6 +13,8 @@ namespace DAL.Models
         public int ItemID { get; set; }
         public int Quantity { get; set; }
         public decimal UnitAmount { get; set; }
+        public virtual Order Order { get; set; }
+        public virtual Item Item { get; set; }
     }
 }
 

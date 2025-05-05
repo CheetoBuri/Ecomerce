@@ -54,6 +54,9 @@
   <ItemGroup>
     <Compile Include="AgentRepository.cs" />
     <Compile Include="DBHelper.cs" />
+    <Compile Include="DTOs\ItemReportDto.cs" />
+    <Compile Include="DTOs\PurchaseSummaryDto.cs" />
+    <Compile Include="EComerceDBContext.cs" />
     <Compile Include="ItemRepository.cs" />
     <Compile Include="Models\Agent.cs" />
     <Compile Include="Models\Item.cs" />
