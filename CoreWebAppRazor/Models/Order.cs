@@ -3,22 +3,15 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CoreWebAppRazor.Models
 {
+    [Table("Order")]
     public class Order
     {
-        [Key]
         public int OrderID { get; set; }
-
-        [Required]
         public DateTime OrderDate { get; set; }
-
-        [Required]
         public int AgentID { get; set; }
-
-        [ForeignKey("AgentID")]
-        public Agent Agent { get; set; }
-
         public decimal TotalAmount { get; set; }
 
-        public ICollection<OrderDetail> OrderDetails { get; set; }
+        public virtual Agent Agent { get; set; }
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

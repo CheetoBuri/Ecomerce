@@ -5,25 +5,15 @@ namespace CoreWebAppRazor.Models
 {
     public class OrderDetail
     {
-        [Key]
         public int ID { get; set; }
-
-        [Required]
         public int OrderID { get; set; }
-
-        [ForeignKey("OrderID")]
-        public Order Order { get; set; }
-
-        [Required]
         public int ItemID { get; set; }
-
-        [ForeignKey("ItemID")]
-        public Item Item { get; set; }
-
-        [Required]
         public int Quantity { get; set; }
-
-        [Required]
         public decimal UnitAmount { get; set; }
+
+        public virtual Item Item { get; set; }
+        public virtual Order Order { get; set; }
+
+
     }
 }
