@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "Reports";
+}
+
+<h2>Reports</h2>
+<ul>
+    <li>@Html.ActionLink("Best Selling Items", "BestItems")</li>
+    <li>@Html.ActionLink("Items Purchased by Agent", "ItemsByAgent", new { agentId = 1 })</li>
+    <li>@Html.ActionLink("Agent Purchases Summary", "AgentPurchases")</li>
+</ul>
+
+

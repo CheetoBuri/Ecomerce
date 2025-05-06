@@ -1,0 +1,27 @@
+﻿@model IEnumerable<dynamic>
+
+@{
+    ViewBag.Title = "Agent Purchases Summary";
+}
+
+
+<h2>Agent Purchases Summary</h2>
+
+<table class="table">
+    <tr>
+        <th>Agent Name</th>
+        <th>Total Orders</th>
+        <th>Total Amount</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.AgentName</td>
+            <td>@item.TotalOrders</td>
+            <td>@item.TotalAmount.ToString("C")</td>
+        </tr>
+    }
+</table>
+
+<p>@Html.ActionLink("Back to Reports", "Index")</p>
+

@@ -3,31 +3,28 @@
 }
 
 <main>
-    <section class="row" aria-labelledby="aspnetTitle">
-        <h1 id="title">ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-        <p><a href="https://asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
-    </section>
+    
 
-    <div class="row">
-        <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-            <h2 id="gettingStartedTitle">Getting started</h2>
-            <p>
-                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                enables a clean separation of concerns and gives you full control over markup
-                for enjoyable, agile development.
-            </p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+    <<div class="row mt-4">
+        <section class="col-md-3">
+            <h3>Agents</h3>
+            <p>Manage sales agents in the system.</p>
+            <p>@Html.ActionLink("View Agents", "Index", "Agents", new { }, new { @class = "btn btn-primary btn-block" })</p>
         </section>
-        <section class="col-md-4" aria-labelledby="librariesTitle">
-            <h2 id="librariesTitle">Get more libraries</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+        <section class="col-md-3">
+            <h3>Items</h3>
+            <p>Manage products available for orders.</p>
+            <p>@Html.ActionLink("View Items", "Index", "Items", new { }, new { @class = "btn btn-primary btn-block" })</p>
         </section>
-        <section class="col-md-4" aria-labelledby="hostingTitle">
-            <h2 id="hostingTitle">Web Hosting</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        <section class="col-md-3">
+            <h3>Orders</h3>
+            <p>View and create customer orders.</p>
+            <p>@Html.ActionLink("View Orders", "Index", "Orders", new { }, new { @class = "btn btn-primary btn-block" })</p>
+        </section>
+        <section class="col-md-3">
+            <h3>Reports</h3>
+            <p>Generate reports on sales and best-selling items.</p>
+            <p>@Html.ActionLink("View Reports", "Index", "Reports", new { }, new { @class = "btn btn-primary btn-block" })</p>
         </section>
     </div>
 </main>
