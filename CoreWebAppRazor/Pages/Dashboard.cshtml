@@ -1,0 +1,13 @@
+﻿@page
+@model CoreWebAppRazor.Pages.DashboardModel
+
+<h2>Welcome, @TempData["UserName"]!</h2>
+
+<p>This is the main dashboard.</p>
+
+<a asp-page="/Items/Index">Manage Items</a>
+<br />
+<a asp-page="/Agents/Index">Manage Agents</a>
+<br />
+<a asp-page="/Orders/Index">Manage Orders</a>
+<br />
