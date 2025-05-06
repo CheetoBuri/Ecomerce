@@ -129,6 +129,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AgentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemsController.cs" />
@@ -173,6 +174,7 @@
     <Compile Include="ViewModels\BestItemViewModel.cs" />
     <Compile Include="ViewModels\ItemReportViewModel.cs" />
     <Compile Include="ViewModels\ItemsByAgentViewModel.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\OrderViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -267,6 +269,7 @@
     <Content Include="Views\Report\BestItems.cshtml" />
     <Content Include="Views\Report\ItemsByAgent.cshtml" />
     <Content Include="Views\Report\AgentPurchases.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -8,24 +8,29 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
-        <div class="container">
-            @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Agents", "Index", "Agents", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Items", "Index", "Items", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Orders", "Index", "Orders", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Report", "Index", "Report", new { area = "" }, new { @class = "nav-link" })</li>
-                </ul>
+    @* Check if the current controller is not "Account" and action is not "Login" *@
+    @if (!(ViewData["ControllerName"] as string == "Account" && ViewData["ActionName"] as string == "Login"))
+    {
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
+            <div class="container">
+                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Agents", "Index", "Agents", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Items", "Index", "Items", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Orders", "Index", "Orders", new { area = "" }, new { @class = "nav-link" })</li>
+                        <li>@Html.ActionLink("Report", "Index", "Report", new { area = "" }, new { @class = "nav-link" })</li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
+    }
+
     <div class="container body-content">
         @RenderBody()
         <hr />
@@ -39,3 +44,5 @@
     @RenderSection("scripts", required: false)
 </body>
 </html>
+
+
