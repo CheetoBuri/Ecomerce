@@ -18,13 +18,24 @@ namespace WinFormUI
         {
             InitializeComponent();
             orderService = new OrderService();
+            this.printDocument1.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument1_PrintPage);
         }
 
         private void OrderReportForm_Load(object sender, EventArgs e)
         {
+            var orderService = new OrderService();
+            var orders = orderService.GetAllOrders();
+            
             cmbOrder.DataSource = orderService.GetAllOrders();
             cmbOrder.DisplayMember = "OrderID";
             cmbOrder.ValueMember = "OrderID";
+
+            dgvOrderDetails.DataSource = orders.Select(o => new
+            {
+                o.OrderID,
+                o.OrderDate,
+                AgentName = o.Agent.AgentName
+            }).ToList();
         }
 
         private void btnShowDetails_Click(object sender, EventArgs e)
@@ -46,6 +57,40 @@ namespace WinFormUI
             {
                 // For simplicity, just show a message (you can use PrintDocument for real printing)
                 MessageBox.Show("Printing Order...");
+            }
+
+            printPreviewDialog1.Document = printDocument1;
+            printPreviewDialog1.ShowDialog();
+        }
+
+        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            int y = 100;
+            int x = 50;
+            int rowHeight = 30;
+
+            Font font = new Font("Arial", 10);
+            Brush brush = Brushes.Black;
+
+            // Header
+            e.Graphics.DrawString("Order Report", new Font("Arial", 16, FontStyle.Bold), brush, x, y);
+            y += 40;
+
+            // Column titles
+            e.Graphics.DrawString("Order ID", font, brush, x, y);
+            e.Graphics.DrawString("Order Date", font, brush, x + 100, y);
+            e.Graphics.DrawString("Agent", font, brush, x + 250, y);
+            y += rowHeight;
+
+            // Data rows
+            foreach (DataGridViewRow row in dgvOrderDetails.Rows)
+            {
+                if (row.IsNewRow) continue;
+
+                e.Graphics.DrawString(row.Cells["OrderID"].Value.ToString(), font, brush, x, y);
+                e.Graphics.DrawString(Convert.ToDateTime(row.Cells["OrderDate"].Value).ToShortDateString(), font, brush, x + 100, y);
+                e.Graphics.DrawString(row.Cells["AgentName"].Value.ToString(), font, brush, x + 250, y);
+                y += rowHeight;
             }
         }
     }
