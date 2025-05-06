@@ -5,11 +5,32 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Orders</h1>
 
 <p>
     <a asp-page="Create">Create New Order</a>
 </p>
+
+<!-- Filter Form -->
+<h4>Filter Orders</h4>
+<form method="get">
+    <div class="form-group">
+        <label for="filterType">Filter by:</label>
+        <select id="filterType" name="filterType" class="form-control">
+            <option value="">Select Filter</option>
+            <option value="bestItems">Best Items</option>
+            <option value="itemsPurchasedByCustomer">Items Purchased by Customers</option>
+            <option value="customerPurchasesItems">Customer Purchases Items</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="customerId">Customer/Agent ID:</label>
+        <input type="number" id="customerId" name="customerId" class="form-control" placeholder="Enter Customer ID" />
+    </div>
+    <button type="submit" class="btn btn-primary">Apply Filter</button>
+</form>
+
+<!-- Order Table -->
 <table class="table">
     <thead>
         <tr>
@@ -26,23 +47,25 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Order) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Agent.AgentName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TotalAmount)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.OrderID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.OrderID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.OrderID">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Order)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Agent.AgentName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalAmount)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.OrderID">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.OrderID">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.OrderID">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+

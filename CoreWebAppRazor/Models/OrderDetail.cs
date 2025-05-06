@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CoreWebAppRazor.Models
 {
+    [Table("OrderDetail")]
     public class OrderDetail
     {
         public int ID { get; set; }
