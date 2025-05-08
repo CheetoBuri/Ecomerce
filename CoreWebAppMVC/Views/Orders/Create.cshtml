@@ -4,34 +4,65 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+h1>Create Order</h1>
 
-<h4>Order</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="OrderDate" class="control-label"></label>
-                <input asp-for="OrderDate" class="form-control" />
-                <span asp-validation-for="OrderDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AgentID" class="control-label"></label>
-                <select asp-for="AgentID" class ="form-control" asp-items="ViewBag.AgentID"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+<form asp-action="Create" method="post">
+    <div>
+        <label asp-for="OrderDate"></label>
+        <input asp-for="OrderDate" class="form-control" />
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+    <div>
+        <label asp-for="AgentID"></label>
+        <select asp-for="AgentID" asp-items="@(new SelectList(ViewBag.AgentList, "Value", "Text"))" class="form-control">
+            <option value="">-- Select Agent --</option>
+        </select>
+    </div>
+
+    <hr />
+    <h4>Order Details</h4>
+    <div id="orderDetailsContainer">
+        <div class="order-detail-row">
+            <select name="OrderDetails[0].ItemID" class="form-control item-select">
+                @foreach (var item in (SelectList)ViewBag.ItemList)
+                {
+                    <option value="@item.Value">@item.Text</option>
+                }
+            </select>
+            <input name="OrderDetails[0].Quantity" placeholder="Quantity" class="form-control" />
+            <input name="OrderDetails[0].UnitAmount" placeholder="Unit Price" class="form-control" />
+            <button type="button" class="btn btn-danger remove-row">Remove</button>
+        </div>
+    </div>
+
+    <button type="button" id="addDetailRow" class="btn btn-secondary">Add Item</button>
+
+    <hr />
+    <button type="submit" class="btn btn-primary">Save Order</button>
+</form>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        let detailIndex = 1;
+
+        $('#addDetailRow').click(function () {
+            const itemSelectHtml = $('.item-select:first').html();
+            const newRow = `
+            <div class="order-detail-row">
+                <select name="OrderDetails[${detailIndex}].ItemID" class="form-control item-select">
+                    ${itemSelectHtml}
+                </select>
+                <input name="OrderDetails[${detailIndex}].Quantity" placeholder="Quantity" class="form-control" />
+                <input name="OrderDetails[${detailIndex}].UnitAmount" placeholder="Unit Price" class="form-control" />
+                <button type="button" class="btn btn-danger remove-row">Remove</button>
+            </div>`;
+            $('#orderDetailsContainer').append(newRow);
+            detailIndex++;
+        });
+
+        $(document).on('click', '.remove-row', function () {
+            $(this).closest('.order-detail-row').remove();
+        });
+    </script>
 }

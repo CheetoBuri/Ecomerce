@@ -21,8 +21,13 @@ namespace CoreWebAppMVC.Controllers
         // GET: Orders
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Orders.Include(o => o.Agent);
-            return View(await applicationDbContext.ToListAsync());
+            var orders = await _context.Orders
+                .Include(o => o.Agent)
+                .Include(o => o.OrderDetails)
+                    .ThenInclude(od => od.Item)
+                .ToListAsync();
+
+            return View(orders);
         }
 
         // GET: Orders/Details/5
@@ -35,7 +40,10 @@ namespace CoreWebAppMVC.Controllers
 
             var order = await _context.Orders
                 .Include(o => o.Agent)
+                .Include(o => o.OrderDetails)
+                    .ThenInclude(od => od.Item)
                 .FirstOrDefaultAsync(m => m.OrderID == id);
+
             if (order == null)
             {
                 return NotFound();
@@ -56,15 +64,27 @@ namespace CoreWebAppMVC.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("OrderID,OrderDate,AgentID")] Order order)
+        public async Task<IActionResult> Create(Order order)
         {
             if (ModelState.IsValid)
             {
+                // Optional: set unit price from Item table (if not coming from the form)
+                foreach (var detail in order.OrderDetails)
+                {
+                    var item = await _context.Items.FindAsync(detail.ItemID);
+                    if (item != null)
+                    {
+                        detail.UnitAmount = item.Price;
+                    }
+                }
+
                 _context.Add(order);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AgentID"] = new SelectList(_context.Agents, "AgentID", "AgentID", order.AgentID);
+
+            ViewData["AgentID"] = new SelectList(_context.Agents, "AgentID", "AgentName", order.AgentID);
+            ViewData["ItemList"] = new SelectList(_context.Items, "ItemID", "ItemName");
             return View(order);
         }
 
