@@ -15,6 +15,7 @@ namespace ASPCoreWebAppMVC.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.IsLoggedIn = TempData["IsLoggedIn"] ?? false;
             return View();
         }
 
