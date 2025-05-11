@@ -13,25 +13,6 @@ namespace ASPCoreWebAppMVC.Controllers
             _context = context;
         }
 
-        // GET: /Account/Register
-        public IActionResult Register()
-        {
-            return View();
-        }
-
-        // POST: /Account/Register
-        [HttpPost]
-        public IActionResult Register(User user)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Users.Add(user);
-                _context.SaveChanges();
-                return RedirectToAction("Login");
-            }
-            return View(user);
-        }
-
         // GET: /Account/Login
         public IActionResult Login()
         {
@@ -47,7 +28,7 @@ namespace ASPCoreWebAppMVC.Controllers
 
             if (user != null)
             {
-                // Set TempData flag to simulate login status
+                // Set login status globally
                 TempData["IsLoggedIn"] = true;
                 return RedirectToAction("Index", "Home");
             }
@@ -55,5 +36,13 @@ namespace ASPCoreWebAppMVC.Controllers
             ViewBag.Message = "Invalid username or password.";
             return View();
         }
+
+        public IActionResult Logout()
+        {
+            // Reset login status globally
+            TempData["IsLoggedIn"] = false;
+            return RedirectToAction("Login", "Account");
+        }
     }
+
 }
