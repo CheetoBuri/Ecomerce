@@ -15,14 +15,19 @@ namespace BLL
 
         public OrderService()
         {
-            orderRepository = new OrderRepository();
+            _orderRepository = new OrderRepository();
         }
 
         public void PlaceOrder(Order order)
         {
             // Example: add total calculation or other logic here if needed
             order.OrderDate = DateTime.Now;
-            orderRepository.InsertOrder(order);
+            _orderRepository.InsertOrder(order);
+        }
+
+        public void CreateOrder(Order order)
+        {
+            _orderRepository.Add(order);
         }
 
         public List<Order> GetAllOrders()

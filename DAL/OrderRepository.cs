@@ -11,34 +11,37 @@ namespace DAL
     public class OrderRepository
     {
         private readonly EComerceDBContext _context;
-        public void InsertOrder(Order order)
-        {
-            using (var conn = DBHelper.GetConnection())
-            {
-                var cmd = new SqlCommand("INSERT INTO [Order] (OrderID, OrderDate, AgentID, TotalAmount) VALUES (@OrderID, @OrderDate, @AgentID, @TotalAmount)", conn);
-                cmd.Parameters.AddWithValue("@OrderID", order.OrderID);
-                cmd.Parameters.AddWithValue("@OrderDate", order.OrderDate);
-                cmd.Parameters.AddWithValue("@AgentID", order.AgentID);
-                cmd.Parameters.AddWithValue("@TotalAmount", order.TotalAmount);
-                conn.Open();
-                cmd.ExecuteNonQuery();
-            }
-        }
+
         public OrderRepository()
         {
             _context = new EComerceDBContext();
         }
 
+        public void InsertOrder(Order order)
+        {
+            _context.Orders.Add(order); // Use EF to add the order
+            _context.SaveChanges(); // Save changes to the DB
+        }
+
         public List<Order> GetAllOrders()
         {
-            return _context.Orders.ToList();
+            return _context.Orders
+                .Include("Agent") // Including related Agent data
+                .Include("OrderDetails.Item") // Including related Item data in OrderDetails
+                .ToList(); // Return list of orders
         }
 
         public List<OrderDetail> GetOrderDetails(int orderId)
         {
             return _context.OrderDetails
                 .Where(od => od.OrderID == orderId)
-                .ToList();
+                .ToList(); // Get order details by orderId
+        }
+
+        public void Add(Order order)
+        {
+            _context.Orders.Add(order); // Add new order
+            _context.SaveChanges(); // Save changes
         }
     }
 }
