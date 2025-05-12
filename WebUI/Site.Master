@@ -46,9 +46,10 @@
                 </button>
                 <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/About">About</a></li>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Contact">Contact</a></li>
+                        <li><a runat="server" href="~/Default.aspx">Home</a></li>
+                        <li><a runat="server" href="~/OrderReport.aspx">Order</a></li>
+                        <li><a runat="server" href="~/Item.aspx">Item</a></li>
+                        <li><a runat="server" href="~/Agent.aspx">Agent</a></li>
                     </ul>
                 </div>
             </div>

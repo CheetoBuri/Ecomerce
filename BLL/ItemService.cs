@@ -15,7 +15,8 @@ namespace BLL
 
         public ItemService()
         {
-            itemRepository = new ItemRepository();
+            _itemRepository = new ItemRepository();
+            itemRepository = _itemRepository;
         }
 
         public List<Item> GetAllItems()

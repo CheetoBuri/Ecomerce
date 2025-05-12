@@ -21,5 +21,16 @@ namespace BLL
         {
             return userRepository.GetAllUsers();
         }
+
+        public User ValidateUser(string username, string password)
+        {
+            return userRepository.GetUserByCredentials(username, password);
+        }
+
+        public User AuthenticateUser(string username, string password)
+        {
+            return userRepository.GetUserByCredentials(username, password);
+        }
+
     }
 }

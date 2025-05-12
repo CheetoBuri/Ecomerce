@@ -32,6 +32,32 @@ namespace DAL
             }
             return users;
         }
+
+        public User GetUserByCredentials(string username, string password)
+        {
+            using (var conn = DBHelper.GetConnection())
+            {
+                var cmd = new SqlCommand("SELECT * FROM Users WHERE UserName = @UserName AND Password = @Password", conn);
+                cmd.Parameters.AddWithValue("@UserName", username);
+                cmd.Parameters.AddWithValue("@Password", password);
+
+                conn.Open();
+                var reader = cmd.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    return new User
+                    {
+                        UserID = (int)reader["UserID"],
+                        UserName = reader["UserName"].ToString(),
+                        Email = reader["Email"].ToString(),
+                        Password = reader["Password"].ToString()
+                    };
+                }
+            }
+
+            return null; // User not found
+        }
     }
 }
 

@@ -10,7 +10,7 @@ namespace DAL
 {
     public class DBHelper
     {
-        private static string connectionString = ConfigurationManager.ConnectionStrings["EComerceDB"].ConnectionString;
+        private static string connectionString = ConfigurationManager.ConnectionStrings["EComerceDBConnectionString"].ConnectionString;
 
         public static SqlConnection GetConnection()
         {
